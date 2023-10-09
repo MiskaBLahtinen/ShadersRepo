@@ -45,6 +45,7 @@ Shader "Custom/TestiShader"
             {
                 Varyings output;
 
+                //output.positionHCSoma = mul(UNITY_MATRIX_P, mul(UNITY_MATRIX_V, mul(UNITY_MATRIX_M, float4(input.positionOS, 1))))
                 output.positionHCS = TransformObjectToHClip(input.positionOS);
                 output.positionWS = TransformObjectToWorld(input.positionOS);
                 output.normalDir = TransformObjectToWorld(input.normalOS);
@@ -54,8 +55,8 @@ Shader "Custom/TestiShader"
 
             float4 Frag(const Varyings input) : SV_TARGET
             {
-                //return half4(input.positionWS, 1);
-                return _Color * clamp(input.normalDir.x, -input.normalDir.x, 1);
+                return half4(input.positionWS, 1);
+                //return _Color * clamp(input.normalDir.x, -input.normalDir.x, 1);
             }
 
             ENDHLSL
