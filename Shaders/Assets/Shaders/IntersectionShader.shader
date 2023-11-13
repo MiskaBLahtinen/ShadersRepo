@@ -56,7 +56,7 @@ Shader "Custom/IntersectionShader"
 				float4 depthTexture = LinearEyeDepth(SampleSceneDepth(GetNormalizedScreenSpaceUV(input.positionHCS)), _ZBufferParams);
 				float4 depthObject = LinearEyeDepth(input.positionWS, UNITY_MATRIX_V);
 
-				float l = pow(1 - saturate(depthTexture - depthObject), 15);
+				float l = pow(1 - saturate(depthTexture - depthObject), 10);
 				return lerp(_Color, _IntersectionColor, l);
 			}
 			 ENDHLSL
