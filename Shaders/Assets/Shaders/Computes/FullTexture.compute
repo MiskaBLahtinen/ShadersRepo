@@ -1,0 +1,7 @@
+#pragma kernel InitFullTexture
+[numthreads(8, 8, 1)]
+void InitFullTexture(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x % 7 == 0 || id.y % 3 == 0)
+        State1[id.xy] = cellColor;
+}

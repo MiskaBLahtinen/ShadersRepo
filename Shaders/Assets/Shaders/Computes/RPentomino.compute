@@ -1,0 +1,16 @@
+#pragma kernel InitRPentomino
+
+[numthreads(8, 8, 1)]
+void InitRPentomino(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x == 256 && id.y == 256)
+        State1[id.xy] = cellColor;
+    if (id.x == 255 && id.y == 256)
+        State1[id.xy] = cellColor;
+    if (id.x == 256 && id.y == 255)
+        State1[id.xy] = cellColor;
+    if (id.x == 257 && id.y == 255)
+        State1[id.xy] = cellColor;
+    if (id.x == 256 && id.y == 257)
+        State1[id.xy] = cellColor;
+}

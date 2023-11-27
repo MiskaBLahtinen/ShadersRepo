@@ -1,0 +1,23 @@
+float frequency;
+float time;
+float2 dir;
+RWStructuredBuffer<float4> positions;
+
+float SampleFunction(float2 pos)
+{
+	pos = pos * frequency * dir + time;
+	return 0.1 * sin(pos.x + pos.y);
+}
+
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Simulate
+
+[numthreads(8,8,1)]
+void Simulate (uint3 id : SV_DispatchThreadID)
+{
+   const uint idx = id.x * 128 + id.y;
+   const float3 currentPos = positions[idx].xyz;
+   const float2 funcPos = float2(id.x/128.0f, id.y / 128.0f);
+
+   positions[idx] = float4(currentPos.x, SampleFunction(funcPos), currentPos.z, 0);
+}

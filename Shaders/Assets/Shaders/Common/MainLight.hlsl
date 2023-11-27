@@ -8,6 +8,7 @@ void MainLight_float(out half3 Direction, out half3 Color, out float DistanceAtt
         DistanceAtten = 0;
         ShadowAtten = 0;
         LayerMask = 0;
+
         #ifdef UNIVERSAL_REALTIME_LIGHTS_INCLUDED
         Light light = GetMainLight();
         Direction = light.direction;
